@@ -4,19 +4,19 @@ import Homepage from './pages/Homepage';
 import ReviewDetails from './pages/ReviewDetails';
 import Category from './pages/Category';
 import { Routes, Route } from "react-router-dom";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+//import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 //apollo client
-const client = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
-  cache: new InMemoryCache()
-});
+// const client = new ApolloClient({
+//   uri: 'http://localhost:1337/graphql',
+//   cache: new InMemoryCache()
+// });
 
 function App() {
   return (
     <div className="App">
      <SiteHeader />
-     <ApolloProvider client={client}>
+     {/* <ApolloProvider client={client}> */}
      <Routes>
       
         <Route exact path="/" element={<Homepage />} />
@@ -24,7 +24,7 @@ function App() {
         <Route path="/category/:id" element={<Category />} />
       
       </Routes>
-      </ApolloProvider>
+      {/* </ApolloProvider> */}
     </div>
   );
 }
