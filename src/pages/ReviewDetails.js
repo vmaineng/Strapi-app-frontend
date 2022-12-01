@@ -1,27 +1,41 @@
-// import React from 'react'
-// import { useParams } from 'react-router-dom'
-// import useFetch from '../hooks/useFetch'
+import React from 'react'
+import { useParams } from 'react-router-dom'
+//import useFetch from '../hooks/useFetch'
+import { useQuery, gql} from '@apollo/client'
 
-// function ReviewDetails() {
-//   const { id } = useParams()
-//   const { loading, error, data } = useFetch('http://localhost:1337/api/reviews/' + id)
+const REVIEW = gql`
+query GetReview($id: ID!) {
+  review(id: $id) {
+    title, 
+    body,
+    rating,
+    id
+  }
+}`
 
-//   if (loading) return <p>Loading...</p>
-//   if (error) return <p>Error :(</p>
+function ReviewDetails() {
+  const { id } = useParams()
+  const { loading, error, data } = useQuery(REVIEW, {
+    variables: {id: id}
+  })
+  //const { loading, error, data } = useFetch('http://localhost:1337/api/reviews/' + id)
 
-//   console.log(data)
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error :(</p>
 
-//   return (
-//     <div>ReviewDetails
-//       <p className="rating">{data.rating}</p>
-//           <h2>{data.title}</h2>
+  console.log(data)
+
+  return (
+    <div>ReviewDetails
+      <p className="rating">{data.review.rating}</p>
+          <h2>{data.review.title}</h2>
           
-//           <small>console list</small>
+          <small>console list</small>
 
-//           <p>{data.body}...</p>
+          <p>{data.review.body}...</p>
           
-//     </div>
-//   )
-// }
+    </div>
+  )
+}
 
-// export default ReviewDetails
+export default ReviewDetails
