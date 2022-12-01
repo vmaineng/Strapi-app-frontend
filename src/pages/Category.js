@@ -39,7 +39,10 @@ function Category() {
           <p className="rating">{review.rating}</p>
           <h2>{review.title}</h2>
           
-          <small>console list</small>
+          {review.categories.map(c => (
+            <small key = {c.id}>{c.name}</small>
+          ))}
+          
 
           <p>{review.body.substring(0, 200)}...</p>
           <Link to={`/details/${review.id}`}>Read more</Link>

@@ -9,7 +9,11 @@ query GetReviews {
     title,
     body,
     rating,
-    id
+    id,
+    categories {
+      name,
+      id
+    }
   }
 }
 `

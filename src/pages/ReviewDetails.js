@@ -9,7 +9,11 @@ query GetReview($id: ID!) {
     title, 
     body,
     rating,
-    id
+    id,
+    categories {
+      id,
+      name
+    }
   }
 }`
 
@@ -30,7 +34,10 @@ function ReviewDetails() {
       <p className="rating">{data.review.rating}</p>
           <h2>{data.review.title}</h2>
           
-          <small>console list</small>
+          {data.review.categories.map(c => ( 
+            <small key={c.id}>{c.name}</small>
+          ))}
+          
 
           <p>{data.review.body}...</p>
           
